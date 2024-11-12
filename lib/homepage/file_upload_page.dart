@@ -304,37 +304,31 @@ class _FileUploadPageState extends State<FileUploadPage> {
     });
 
     try {
+      final mediaIds = await Future.wait(_selectedFiles.map((file) => _uploadMedia(file)));
+      await _createPost(mediaIds);
+
+      // Show the success snack bar and clear the form fields once data is successfully uploaded
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text('Data submitted successfully')),
+      // );
+
+      // Clear form fields
       setState(() {
         _selectedFiles.clear();
         _titleController.clear();
+        _controller.clear();
       });
-
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Data submitted successfully')),
-      );
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to submit data')),
+        SnackBar(content: Text('Error: ${e.toString()}')),
       );
     } finally {
       setState(() {
         _isLoading = false; // Stop loading state
       });
     }
-
-
-    setState(() => _isLoading = true);
-    try {
-      final mediaIds = await Future.wait(_selectedFiles.map((file) => _uploadMedia(file)));
-      await _createPost(mediaIds);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString()}')),
-      );
-    } finally {
-      setState(() => _isLoading = false);
-    }
   }
+
 
   Future<String> _uploadMedia(File file) async {
     final url = Uri.parse('$_baseUrl/wp-json/wp/v2/media');

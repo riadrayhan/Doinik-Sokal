@@ -154,7 +154,6 @@ class _PostListScreenState extends State<PostListScreen> {
             itemBuilder: (context, index) {
               final post = _filteredPosts[index];
               return Card(
-                shadowColor: Colors.lightBlueAccent,
                 margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: ListTile(
                   title: Text(

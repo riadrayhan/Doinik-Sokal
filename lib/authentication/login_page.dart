@@ -132,97 +132,100 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: FadeTransition(
-          opacity: _fadeAnimation,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Logo and Header
-                Container(
-                  height: 100,
-                  margin: EdgeInsets.only(bottom: 40),
-                  child: Hero(
-                    tag: 'logo',
-                    child: Image.asset(
-                      'assets/header.png',
-                      fit: BoxFit.contain,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SafeArea(
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Logo and Header
+                  Container(
+                    height: 100,
+                    margin: EdgeInsets.only(bottom: 40),
+                    child: Hero(
+                      tag: 'logo',
+                      child: Image.asset(
+                        'assets/header.png',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                ),
 
-                // Welcome Text
-                Text(
-                  'Welcome Back!',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Please sign in to continue',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey[600],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 40),
-
-                // Email Field
-                _buildTextField(
-                  Icons.email_outlined,
-                  'Email',
-                  _emailController,
-                  TextInputType.emailAddress,
-                ),
-                SizedBox(height: 16),
-
-                // Password Field
-                _buildTextField(
-                  Icons.lock_outline,
-                  'Password',
-                  _passwordController,
-                  TextInputType.visiblePassword,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isPasswordVisible
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(height: 24),
-
-                // Login Button
-                _buildLoginButton(),
-                SizedBox(height: 16),
-
-                // Forgot Password Link
-                TextButton(
-                  onPressed: () {
-                    // Add forgot password functionality
-                  },
-                  child: Text(
-                    'Forgot Password?',
+                  // Welcome Text
+                  Text(
+                    'Welcome Back!',
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Please sign in to continue',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 40),
+
+                  // Email Field
+                  _buildTextField(
+                    Icons.email_outlined,
+                    'Email',
+                    _emailController,
+                    TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: 16),
+
+                  // Password Field
+                  _buildTextField(
+                    Icons.lock_outline,
+                    'Password',
+                    _passwordController,
+                    TextInputType.visiblePassword,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible
+                            ? Icons.visibility_outlined
+                            : Icons.visibility_off_outlined,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(height: 24),
+
+                  // Login Button
+                  _buildLoginButton(),
+                  SizedBox(height: 16),
+
+                  // Forgot Password Link
+                  TextButton(
+                    onPressed: () {
+                      // Add forgot password functionality
+                    },
+                    child: Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
